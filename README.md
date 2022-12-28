@@ -16,7 +16,7 @@ include Makefile.semver.mk
 include Makefile.foo.mk
 ```
 
-After that, run the `make` command to finalize the installation of those files:
+After that, use the `make` command to finalize the installation of those files:
 
 ```sh
 make install
