@@ -68,6 +68,10 @@ Quick Makefile reference:
 - [makefiletutorial.com](https://makefiletutorial.com/)
 - [wikipedia.org](https://en.wikipedia.org/wiki/Make_(software))
 
+Additional configuration for Microsoft Windows users:
+
+- [setup Git Credential Manager on WSL2](https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-git#git-credential-manager-setup)
+
 ---
 
 **License:** MPL-2
