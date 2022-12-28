@@ -4,7 +4,7 @@ A collection of reusable makefiles and tasks designed to make managing your pyth
 
 ## Installation
 
-Add a main **`Makefile`** in your working directory and download the individual files you need as follows:
+Add a main `Makefile` in your working directory and download the individual files you need as follows:
 
 ```Makefile
 install: Makefile.semver.mk Makefile.foo.mk
@@ -16,7 +16,7 @@ include Makefile.semver.mk
 include Makefile.foo.mk
 ```
 
-After that, run the **`make`** command to finalize the installation of those files:
+After that, run the `make` command to finalize the installation of those files:
 
 ```sh
 make install
