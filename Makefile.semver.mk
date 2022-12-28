@@ -84,12 +84,24 @@ beta:
 version:
 	@set -e ;\
 		NEW_VERSION=$$( [ -n "$$v" ] && echo "v"$${v#v} || echo $$NEW_VERSION ) ;\
-		if [ -n "$$NEW_VERSION" ]; then \
-			$(MAKE) --no-print-directory readme v=$$NEW_VERSION ;\
-		fi ;\
 		echo "v$(CURRENT_VERSION)" ;\
 		echo "$$NEW_VERSION" ;\
-		git tag $$NEW_VERSION
+		$(MAKE) --no-print-directory preversion v=$$NEW_VERSION ;\
+		git add -A ;\
+		git commit -m "$$NEW_VERSION" ;\
+		git tag $$NEW_VERSION ;\
+		$(MAKE) --no-print-directory postversion v=$$NEW_VERSION
+
+preversion:
+	@set -e ;\
+		if [ -n "$$v" ]; then \
+			$(MAKE) --no-print-directory readme v=$$v ;\
+		fi
+
+postversion:
+	@set -e ;\
+		git push ;\
+		$(MAKE) --no-print-directory push-tags
 
 ##
 # Update remote git tags (local --> remote)
@@ -102,7 +114,7 @@ push-tags:
 # Purge local git tags (remote --> local)
 ##
 prune-tags:
-	git fetch --prune gorigin "+refs/tags/*:refs/tags/*"
+	git fetch --prune origin "+refs/tags/*:refs/tags/*"
 	@echo -e '\nLocal tags deleted\n'
 
 ##

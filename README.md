@@ -50,7 +50,6 @@ Create a new `git tag` that is appropriate for the version you intend to publish
 
 ```sh
 make version v=1.1.0
-make push-tags
 ```
 
 Refer to [Makefile.semver.mk](./Makefile.semver.mk) file for a complete list of available tasks.
