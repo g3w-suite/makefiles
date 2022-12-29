@@ -26,7 +26,16 @@ make install
 
 ## Configuration
 
-Update the download URL to always get a specific version of the file:
+Update your `.gitignore` to exclude from version control all the Makefiles installed:
+
+```sh
+# /Makefile.*.mk
+
+/Makefile.semver.mk
+/Makefile.foo.mk
+```
+
+Update your download URL to always get a specific version of a Makefile:
 
 ```sh
 # unstable branch (master)
@@ -44,12 +53,13 @@ wget https://raw.githubusercontent.com/g3w-suite/makefiles/71aea4e60b7d4c05e9e73
 
 For more info: [getting permanent links to files](https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files)
 
-## Publish
+## Publish a new release
 
 Create a new `git tag` that is appropriate for the version you intend to publish, eg:
 
 ```sh
 make version v=1.1.0
+make push-tags
 ```
 
 Refer to [Makefile.semver.mk](./Makefile.semver.mk) file for a complete list of available tasks.

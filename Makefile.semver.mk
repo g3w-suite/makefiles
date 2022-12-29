@@ -1,7 +1,9 @@
 ##
-# Makefile.semver.mk
+# WARNING: do not track this file your VCS, to edit check out:
+# 
+# <https://github.com/g3w-suite/makefiles/Makefile.semver.mk>
 ##
-
+# USAGE: include it your main Makefile as follows:
 ##
 # install: Makefile.semver.mk
 #
@@ -86,27 +88,18 @@ version:
 		NEW_VERSION=$$( [ -n "$$v" ] && echo "v"$${v#v} || echo $$NEW_VERSION ) ;\
 		echo "v$(CURRENT_VERSION)" ;\
 		echo "$$NEW_VERSION" ;\
-		$(MAKE) --no-print-directory preversion v=$$NEW_VERSION ;\
+		if [ -n "$$NEW_VERSION" ]; then \
+			$(MAKE) --no-print-directory readme v=$$NEW_VERSION ;\
+		fi ;\
 		git add -A ;\
 		git commit -m "$$NEW_VERSION" ;\
-		git tag $$NEW_VERSION ;\
-		$(MAKE) --no-print-directory postversion v=$$NEW_VERSION
-
-preversion:
-	@set -e ;\
-		if [ -n "$$v" ]; then \
-			$(MAKE) --no-print-directory readme v=$$v ;\
-		fi
-
-postversion:
-	@set -e ;\
-		git push ;\
-		$(MAKE) --no-print-directory push-tags
+		git tag $$NEW_VERSION
 
 ##
 # Update remote git tags (local --> remote)
 ##
 push-tags:
+	git push
 	git push --tags
 	@echo -e '\nRemote tags updated\n'
 
