@@ -7,13 +7,13 @@ A collection of reusable makefiles and tasks designed to make managing your pyth
 Add a main `Makefile` in your working directory and download the individual files you need as follows:
 
 ```Makefile
-install: Makefile.semver.mk Makefile.foo.mk
+install: Makefile.semver.mk Makefile.venv.mk
 
-Makefile.semver.mk Makefile.foo.mk:
+Makefile.semver.mk Makefile.venv.mk:
 	wget https://raw.githubusercontent.com/g3w-suite/makefiles/master/$@
 
 include Makefile.semver.mk
-include Makefile.foo.mk
+include Makefile.venv.mk
 ```
 
 After that, use the `make` command to finalize the installation of those files:
@@ -32,7 +32,7 @@ Update your `.gitignore` to exclude from version control all the Makefiles insta
 # /Makefile.*.mk
 
 /Makefile.semver.mk
-/Makefile.foo.mk
+/Makefile.venv.mk
 ```
 
 Update your download URL to always get a specific version of a Makefile:

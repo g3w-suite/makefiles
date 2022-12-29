@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*y.class
+
+# Python setuptools
+*.egg
+*.egg-info/
+*.eggs
+
+# Python virtualenv
+.venv/
+venv/
+
+# PyPi related files
+.coverage
+dist/
+build/
+
+_version.py
+
+# Ignore this only for local development
+requirements_dev.txt
+requirements.txt
+pyproject.toml

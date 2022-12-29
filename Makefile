@@ -2,7 +2,8 @@
 # Makefile
 ##
 
-README_PROJECT_TITLE=makefiles
+PROJECT_NAME = makefiles
+PKG_NAME = makefiles
 
 default: list-tasks
 
@@ -18,3 +19,4 @@ list-tasks:
 	@echo
 
 include Makefile.semver.mk
+include Makefile.venv.mk
