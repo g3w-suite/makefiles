@@ -1,4 +1,4 @@
-# makefiles v0.1.0
+# makefiles v0.1.1
 
 A collection of reusable makefiles and tasks designed to make managing your python and docker projects easier.
 
