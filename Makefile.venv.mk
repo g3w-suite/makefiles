@@ -14,6 +14,7 @@
 ##
 
 PKG_NAME ?=      $(CURDIR_NAME)
+PKG_DESC ?=      Insert project description here
 CURDIR_NAME ?=   $(notdir $(CURDIR))
 
 # ANSI color codes
@@ -46,7 +47,7 @@ dynamic         = [
     "optional-dependencies" # retrieve development dependencies from requirements_dev.txt
 ] 
 authors         = [ { name = "Gis3w snc", email = "info@gis3w.it" } ]
-description     = "Insert project description here"
+description     = "$(PKG_DESC)"
 readme          = "README.md"
 license         = { text = "Mozilla Public License 2.0 (MPL 2.0)" }
 classifiers     = [
@@ -112,7 +113,7 @@ export GITIGNORE_TEMPLATE
 # Initialize a new python virtual env
 ##
 venv: clean-venv pkg-files
-	@echo $(H1__)Creating a Python environment $(VENV_ROOT) $(__H1)
+	@echo $(H1__)Creating a new Python environment: $(VENV_ROOT) $(__H1)
 
 	$(GLOBAL_PYTHON) -m venv --system-site-packages --prompt $(PKG_NAME) $(VENV_ROOT)
 
@@ -181,18 +182,19 @@ publish: build
 # Clear python virtual env
 ##
 clean-venv:
-	@echo $(H1__)Clear $(VENV_ROOT) $(__H1)
+	@echo $(H1__)Clearing $(VENV_ROOT) $(__H1)
 
 	rm -rf $(VENV_ROOT)
 	rm -rf *.egg dist build .coverage .cache .pytest_cache $(PKG_NAME).egg-info _version.py
 	find . -name '__pycache__' -delete -o -name '*.pyc' -delete
 
+	@echo "Done"
 	@echo
 
 ##
 # Ensure that all the files needed for a PyPi package are there
 ##
-pkg-files: requirements.txt requirements_dev.txt pyproject.toml README.md .gitignore
+pkg-files: requirements.txt requirements_dev.txt pyproject.toml README.md .gitignore LICENSE
 	@:
 
 requirements.txt requirements_dev.txt README.md:
@@ -203,3 +205,6 @@ pyproject.toml:
 
 .gitignore:
 	echo "$$GITIGNORE_TEMPLATE" > $@
+
+LICENSE:
+	wget https://raw.githubusercontent.com/g3w-suite/makefiles/master/$@

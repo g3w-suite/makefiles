@@ -4,6 +4,7 @@
 
 PROJECT_NAME = makefiles
 PKG_NAME = makefiles
+PKG_DESC = A collection of reusable makefiles and tasks designed to make managing your python and docker projects easier.
 
 default: list-tasks
 
