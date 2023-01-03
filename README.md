@@ -51,6 +51,19 @@ wget https://raw.githubusercontent.com/g3w-suite/makefiles/71aea4e60b7d4c05e9e73
 # wget https://raw.githubusercontent.com/:org/:repo/:branch/:path
 ```
 
+Consider to edit your `install` task as follows in order to keep all Makefile versions consistent:
+
+```Makefile
+INCLUDE_MAKEFILES_RELEASE = v0.1.1
+INCLUDE_MAKEFILES =         Makefile.semver.mk Makefile.venv.mk
+
+install: $(INCLUDE_MAKEFILES)
+
+$(INCLUDE_MAKEFILES):
+	wget https://raw.githubusercontent.com/g3w-suite/makefiles/$(INCLUDE_MAKEFILES_RELEASE)/$@
+$(foreach i, ${INCLUDE_MAKEFILES}, $(eval include $i))
+```
+
 For more info: [getting permanent links to files](https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files)
 
 ## Publish a new release
