@@ -62,6 +62,9 @@ install: $(INCLUDE_MAKEFILES)
 $(INCLUDE_MAKEFILES):
 	wget https://raw.githubusercontent.com/g3w-suite/makefiles/$(INCLUDE_MAKEFILES_RELEASE)/$@
 $(foreach i, ${INCLUDE_MAKEFILES}, $(eval include $i))
+
+clean:
+	rm $(INCLUDE_MAKEFILES)
 ```
 
 For more info: [getting permanent links to files](https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files)
