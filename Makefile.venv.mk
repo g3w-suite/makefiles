@@ -67,7 +67,7 @@ classifiers     = [
 
 [tool.setuptools]
 packages        = ["$(PKG_NAME)"]
-package-dir     = { $(PKG_NAME) = "." }
+package-dir     = { $(PKG_NAME) = "$(PKG_NAME)" }
 
 [tool.setuptools.dynamic]
 dependencies    = { file = ["requirements.txt"] }
@@ -76,7 +76,8 @@ dependencies    = { file = ["requirements.txt"] }
 dev  = { file = ["requirements_dev.txt"] }
 
 [tool.setuptools_scm]
-write_to        = "_version.py" # hardcode version number in a file
+fallback_version = "0.0.0-alpha.0"
+write_to         = "_version.py" # hardcode version number in a file
 #
 # Or alternatively retrieve it at runtime:
 # https://github.com/pypa/setuptools_scm/#retrieving-package-version-at-runtime
