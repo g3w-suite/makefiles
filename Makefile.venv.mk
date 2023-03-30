@@ -34,8 +34,8 @@ define PYPROJECT_TEMPLATE
 [build-system]
 build-backend   = "setuptools.build_meta"
 requires        = [
-    "setuptools>=45",
-    "setuptools_scm[toml]>=6.2"
+    "setuptools>=67",
+    "setuptools_scm[toml]>=7.1"
 ]
 
 [project]
@@ -66,8 +66,13 @@ classifiers     = [
 "Bug Tracker"   = "https://github.com/g3w-suite/$(PKG_NAME)/issues"
 
 [tool.setuptools]
-packages        = ["$(PKG_NAME)"]
-package-dir     = { $(PKG_NAME) = "$(PKG_NAME)" }
+# Manual package discovery
+# packages        = ["$(PKG_NAME)"]
+# package-dir     = { $(PKG_NAME) = "$(PKG_NAME)" }
+#
+# https://setuptools.pypa.io/en/latest/userguide/package_discovery.html#automatic-discovery
+#
+# NB: see also: MANIFEST.in
 
 [tool.setuptools.dynamic]
 dependencies    = { file = ["requirements.txt"] }
@@ -83,6 +88,15 @@ write_to         = "_version.py" # hardcode version number in a file
 # https://github.com/pypa/setuptools_scm/#retrieving-package-version-at-runtime
 endef
 export PYPROJECT_TEMPLATE
+
+# MANIFEST.in
+define MANIFEST_TEMPLATE
+include LICENSE
+include README.md
+recursive-include $(PKG_NAME)/static *
+recursive-include $(PKG_NAME)/templates *
+endef
+export MANIFEST_TEMPLATE
 
 # .gitignore
 define GITIGNORE_TEMPLATE
@@ -194,7 +208,7 @@ clean-venv:
 ##
 # Ensure that all the files needed for a PyPi package are there
 ##
-pkg-files: requirements.txt requirements_dev.txt pyproject.toml README.md .gitignore LICENSE
+pkg-files: requirements.txt requirements_dev.txt pyproject.toml MANIFEST.in README.md .gitignore LICENSE
 	@:
 
 requirements.txt requirements_dev.txt README.md:
@@ -202,6 +216,9 @@ requirements.txt requirements_dev.txt README.md:
 
 pyproject.toml:
 	echo "$$PYPROJECT_TEMPLATE" > $@
+
+MANIFEST.in:
+	echo "$$MANIFEST_TEMPLATE" > $@
 
 .gitignore:
 	echo "$$GITIGNORE_TEMPLATE" > $@
